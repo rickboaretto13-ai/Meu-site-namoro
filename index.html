@@ -103,7 +103,7 @@ frameborder="0">
 <div id="intro">
   <h1>💖 Nosso Amor 💖</h1>
   <p>Uma história como filme...</p>
-  <button id="playBtn">▶ ASSISTIR</button>
+  <button onclick="iniciarSite()">▶ ASSISTIR</button>
 </div>
 
 <!-- FILME -->
@@ -122,45 +122,49 @@ frameborder="0">
 
 <script>
 
-document.addEventListener("DOMContentLoaded", function () {
+function iniciarSite(){
 
-  const btn = document.getElementById("playBtn");
+  const intro = document.getElementById("intro");
+  const movie = document.getElementById("movie");
+  const fade = document.getElementById("fade");
 
-  btn.addEventListener("click", function () {
+  if(!intro || !movie){
+    alert("Erro: elementos não encontrados no HTML");
+    return;
+  }
 
-    document.getElementById("fade").style.opacity = 1;
+  fade.style.opacity = 1;
 
-    setTimeout(() => {
+  setTimeout(() => {
 
-      document.getElementById("intro").style.display = "none";
-      document.getElementById("movie").style.display = "block";
+    intro.style.display = "none";
+    movie.style.display = "block";
 
-      // ativa música
-      let yt = document.getElementById("yt");
-      yt.src = yt.src.replace("autoplay=0", "autoplay=1");
+    // música YouTube
+    const yt = document.getElementById("yt");
+    if(yt){
+      yt.src = yt.src.replace("autoplay=0","autoplay=1");
+    }
 
-      escreverHistoria();
-      criarCoracoes();
+    escreverHistoria();
+    criarCoracoes();
 
-    }, 1200);
-
-  });
-
-});
+  }, 1000);
+}
 
 function escreverHistoria(){
 
   const el = document.getElementById("story");
 
+  if(!el) return;
+
   const texto = `Minha princesinha cacheadinha 💖
 
-Desde 20/12/2025, minha vida mudou completamente.
+Desde 20/12/2025 minha vida mudou completamente.
 
-Você se tornou minha paz, meu amor e meu lar.
+Você é minha paz, meu amor e meu lar.
 
-Cada dia com você parece um filme real.
-
-E eu sempre vou escolher você.`;
+E eu escolho você todos os dias.`;
 
   let i = 0;
 
@@ -168,7 +172,7 @@ E eu sempre vou escolher você.`;
     if(i < texto.length){
       el.innerHTML += texto.charAt(i);
       i++;
-      setTimeout(digitar, 35);
+      setTimeout(digitar, 30);
     }
   }
 
@@ -179,21 +183,22 @@ function criarCoracoes(){
 
   setInterval(() => {
 
-    let h = document.createElement("div");
+    const h = document.createElement("div");
     h.innerHTML = "💖";
-    h.classList.add("heart");
-
+    h.style.position = "absolute";
     h.style.left = Math.random()*100 + "vw";
     h.style.top = Math.random()*100 + "vh";
+    h.style.opacity = "0.2";
+    h.style.fontSize = "60px";
 
     document.body.appendChild(h);
 
-    setTimeout(()=>h.remove(),4000);
+    setTimeout(() => h.remove(), 4000);
 
   }, 500);
 }
 
-</script>
+               </script>
 
 </body>
 </html>
