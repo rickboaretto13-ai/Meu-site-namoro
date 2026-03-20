@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nosso Amor ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+
+body{
+background: linear-gradient(135deg,#000,#1a1a1a);
+color:#fff;
+overflow-x:hidden;
+text-align:center;
+}
+
+/* TELA INICIAL */
+#start{
+position:fixed;
+width:100%;
+height:100%;
+background:#000;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+z-index:999;
+}
+
+#start h1{
+font-size:24px;
+margin-bottom:20px;
+}
+
+#start button{
+padding:15px 30px;
+border:none;
+border-radius:30px;
+background:#ff1e4d;
+color:#fff;
+font-size:18px;
+}
+
+/* SITE */
+header{
+padding:20px;
+font-size:22px;
+}
+
+.hero{
+padding:30px;
+}
+
+.contador{
+color:#ff4d6d;
+margin:10px;
+}
+
+.galeria img{
+width:90%;
+max-width:400px;
+border-radius:20px;
+margin:10px;
+box-shadow:0 0 20px rgba(255,0,80,0.5);
+}
+
+.texto{
+padding:20px;
+line-height:1.7;
+}
+
+button{
+margin:20px;
+padding:15px 30px;
+border:none;
+border-radius:30px;
+background:linear-gradient(45deg,#ff4d6d,#ff1e4d);
+color:#fff;
+font-size:18px;
+}
+
+/* CORAÇÕES */
+.coracao{
+position:fixed;
+top:-10px;
+color:red;
+animation:cair linear infinite;
+}
+
+@keyframes cair{
+to{transform:translateY(100vh);}
+}
+</style>
+</head>
+
+<body>
+
+<!-- TELA DE ENTRADA -->
+<div id="start">
+  <h1>Tenho uma surpresa pra você ❤️</h1>
+  <button onclick="entrar()">Entrar</button>
+</div>
+
+<!-- SITE -->
+<div id="site" style="display:none;">
+
+<header>❤️ Ricardo & Minha Princesinha Cacheadinha ❤️</header>
+
+<div class="hero">
+<h1>3 Meses de Amor 💖</h1>
+<p>Você mudou minha vida...</p>
+</div>
+
+<div class="contador" id="tempo"></div>
+
+<div class="galeria">
+<img src="images/IMG-20260302-WA0040.jpg">
+<img src="images/IMG-20260227-WA0008.jpg">
+</div>
+
+<div class="texto">
+Meu amor, minha princesa, minha cacheadinha... ❤️<br><br>
+
+Desde o dia 20/12/2025, minha vida nunca mais foi a mesma.  
+Você chegou e trouxe luz, trouxe amor, trouxe sentido pra tudo.  
+
+Você é meu refúgio, minha paz, meu sorriso todos os dias.  
+Cada momento ao seu lado é único e especial.  
+
+Esses 3 meses são só o começo de tudo que eu quero viver com você.  
+Eu quero você hoje, amanhã e sempre.  
+
+Eu te amo infinitamente 💖
+</div>
+
+<button onclick="whatsapp()"></button>
+
+<audio id="musica" loop>
+<source src="https://www2.cs.uic.edu/~i101/SoundFiles/StarWars60.wav">
+</audio>
+
+</div>
+
+<script>
+// ENTRADA
+function entrar(){
+document.getElementById("start").style.display="none";
+document.getElementById("site").style.display="block";
+document.getElementById("musica").play();
+}
+
+// CONTADOR
+const inicio=new Date("2025-12-20");
+
+function atualizar(){
+const agora=new Date();
+const diff=agora-inicio;
+const dias=Math.floor(diff/(1000*60*60*24));
+document.getElementById("tempo").innerText="Estamos juntos há "+dias+" dias ❤️";
+}
+
+setInterval(atualizar,1000);
+
+// WHATSAPP
+function whatsapp(){
+function whatsapp(){
+window.open("https://youtu.be/Yi4MQecGdfA?si=w_B6jupgWqkNsgu6", "_blank");
+}
+
+// CORAÇÕES
+function coracoes(){
+const c=document.createElement("div");
