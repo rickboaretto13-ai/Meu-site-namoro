@@ -2,26 +2,26 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<title>💖 Só pra você</title>
+<title>GOD MODE 💖</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 body{
   margin:0;
-  font-family: Georgia;
   background:black;
   color:white;
+  font-family: Arial;
   overflow:hidden;
-  text-align:center;
 }
 
-/* LOGIN */
-#login{
+/* 🔐 LOGIN */
+#access{
   height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
   flex-direction:column;
+  text-align:center;
 }
 
 input{
@@ -33,37 +33,42 @@ input{
 }
 
 button{
-  padding:12px 30px;
-  background:#ff4d6d;
+  padding:12px 35px;
   border:none;
+  border-radius:25px;
+  background:#e50914;
   color:white;
-  border-radius:20px;
   cursor:pointer;
 }
 
-/* SITE */
-#site{
+/* 🎬 APP */
+#app{
   display:none;
+  text-align:center;
   padding:20px;
 }
 
 /* TEXTO */
 #story{
-  max-width:700px;
+  max-width:800px;
   margin:auto;
   font-size:22px;
-  line-height:1.8;
+  line-height:1.9;
+  opacity:0;
+  transition:2s;
 }
 
-/* FOTO */
+/* IMAGENS CINEMÁTICAS */
 .img{
   display:none;
   margin-top:20px;
+  opacity:0;
+  transition:2s;
 }
 
 .img img{
   width:220px;
-  border-radius:15px;
+  border-radius:10px;
 }
 
 /* CARTA */
@@ -75,26 +80,40 @@ button{
   white-space:pre-line;
 }
 
-/* WHATSAPP */
-#whats{
+/* CONTROLES */
+#controls{
   display:none;
   margin-top:20px;
 }
 
-/* CORAÇÕES */
+/* CORAÇÕES PROFUNDOS */
 .heart{
   position:absolute;
-  animation:float 6s linear forwards;
+  animation:float 7s linear forwards;
+  opacity:0.8;
 }
 
 @keyframes float{
-  from{transform:translateY(100vh);}
-  to{transform:translateY(-100vh);}
+  from{transform:translateY(100vh) scale(0.8);}
+  to{transform:translateY(-100vh) scale(1.2);}
+}
+
+/* FADE CINEMA */
+#fade{
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:black;
+  opacity:0;
+  pointer-events:none;
+  transition:3s;
 }
 </style>
 </head>
 
 <body>
+
+<div id="fade"></div>
 
 <!-- 🎧 MÚSICA -->
 <iframe id="music"
@@ -102,18 +121,18 @@ width="0" height="0"
 src="https://www.youtube.com/embed/Yi4MQecGdfA?enablejsapi=1"
 allow="autoplay"></iframe>
 
-<!-- 🔐 LOGIN -->
-<div id="login">
-  <h2>💖 Área exclusiva</h2>
-  <p>Digite sua senha, minha princesa</p>
-  <input id="senha" placeholder="senha">
-  <button onclick="entrar()">Entrar</button>
+<!-- 🔐 ACESSO -->
+<div id="access">
+  <h2>🔐 GOD ACCESS</h2>
+  <p>Insira a chave emocional</p>
+  <input id="senha" placeholder="key">
+  <button onclick="enter()">Desbloquear</button>
 </div>
 
-<!-- 💖 SITE -->
-<div id="site">
+<!-- 🎬 APP -->
+<div id="app">
 
-  <h1>💖 Só você e eu 💖</h1>
+  <h1>💖 GOD MODE ACTIVE</h1>
 
   <p id="story"></p>
 
@@ -127,111 +146,142 @@ allow="autoplay"></iframe>
 
   <div id="carta"></div>
 
-  <!-- 💬 WHATSAPP -->
-  <div id="whats">
-    <button onclick="responder()">💬 Me responde</button>
+  <div id="controls">
+    <button onclick="whats()">💬 Responder</button>
+    <button onclick="location.reload()">🔁 Reassistir</button>
   </div>
 
 </div>
 
 <script>
 
-/* 🔐 SENHA SIMPLES */
-function entrar(){
+/* 🔐 ACESSO GOD */
+function enter(){
   let senha = document.getElementById("senha").value;
 
-  if(senha === "20/12/2025"){
-    login.style.display="none";
-    site.style.display="block";
+  if(senha === "20.12.2025"){
+
+    access.style.display="none";
+    app.style.display="block";
 
     music.src += "&autoplay=1";
+
     start();
+
   } else {
-    alert("senha errada 💔");
+    alert("❌ chave incorreta");
   }
 }
 
-/* 🎬 INICIO */
+/* 🎬 INÍCIO */
 function start(){
   escrever();
   coracoes();
 }
 
-/* 📖 HISTÓRIA EXCLUSIVA */
+/* 📖 TEXTO GOD MODE */
 function escrever(){
 
-  const texto = `Minha princesa...
+  const texto = `isso não é um site.
 
-Esse site não é pra qualquer pessoa.
+é uma lembrança viva.
 
-É só pra você.
+criada para uma única pessoa.
 
-Você é meu mundo inteiro.
+você.
 
-E mesmo quando eu erro...
+Mais um mês ao seu lado
 
-eu ainda te escolho.
+olha onde chegamos meu amor algo incrível 
+  
+que nenhum de nós 2 pensamos em passar,
 
-Sempre.`;
+um ensinando o outro em cada questão de vida.
+
+Mais...`;
 
   let i = 0;
 
-  function digitar(){
+  function type(){
+    story.style.opacity = 1;
+
     if(i < texto.length){
       story.innerHTML += texto.charAt(i);
       i++;
-      setTimeout(digitar, 50);
+      setTimeout(type, 55);
     } else {
 
-      setTimeout(()=> img1.style.display="block", 1000);
-      setTimeout(()=> img2.style.display="block", 2500);
+      setTimeout(()=>{
+        img1.style.display="block";
+        img1.style.opacity=1;
+      },1200);
 
       setTimeout(()=>{
-        carta.style.display="block";
-        escreverCarta();
+        img2.style.display="block";
+        img2.style.opacity=1;
+      },2600);
+
+      setTimeout(()=>{
+        fade.style.opacity=0.6;
       },4000);
+
+      setTimeout(cartaFinal,5000);
     }
   }
 
-  digitar();
+  type();
 }
 
-/* 💌 CARTA FINAL */
-function escreverCarta(){
+/* 💌 CARTA FINAL GOD */
+function cartaFinal(){
 
-  const texto = `Eu não preciso de nada no mundo...
+  const texto = `eu não criei isso por acaso.
 
-só de você.
+eu criei porque você significa tudo.
 
-Se um dia você duvidar disso...
+e isso aqui é só uma forma pequena
 
-lembra desse site.
+de mostrar um sentimento gigante.
 
-Ele foi feito pensando em cada detalhe seu.
+Mais mesmo criando um site ainda
 
-💖 Eu te amo.`;
+não chega perto do que eu sou capaz
+
+de fazer por você, por nós.
+
+quero sempre te fazer mulher mais feliz desse mundo
+
+eu agradeço por cada conselho e até mesmo
+
+as broncas 🙄,
+
+mais no fundo eu sei que é pro meu bem.
+
+EU TE AMO MUITÃO TÃO TÃO MINHA PRINCESA.`;
+
+  carta.style.display="block";
 
   let i = 0;
 
-  function digitar(){
+  function type(){
     if(i < texto.length){
       carta.innerHTML += texto.charAt(i);
       i++;
-      setTimeout(digitar, 40);
+      setTimeout(type,45);
     } else {
-      setTimeout(()=>whats.style.display="block", 1000);
+      controls.style.display="block";
     }
   }
 
-  digitar();
+  type();
 }
 
-/* 💬 WHATSAPP */
-function responder(){
-  window.open("https://wa.me/5511978297307?text=Eu%20vi%20o%20site%20💖", "_blank");
+/* 💬 WHATS */
+function whats(){
+  window.open("https://wa.me/5511978297307?text=Eu%20vi%20tudo%20💖","_blank");
 }
 
-/* 💖 CORAÇÕES */
+/* 💖 CORAÇÕES PROFUNDOS */
 function coracoes(){
   setInterval(()=>{
     let h = document.createElement("div");
@@ -239,8 +289,8 @@ function coracoes(){
     h.className="heart";
     h.style.left=Math.random()*100+"vw";
     document.body.appendChild(h);
-    setTimeout(()=>h.remove(),6000);
-  },300);
+    setTimeout(()=>h.remove(),7000);
+  },250);
 }
 
 </script>
