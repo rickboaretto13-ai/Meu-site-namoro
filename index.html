@@ -2,30 +2,30 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<title>Nossa Série 💖</title>
+<title>Nosso Filme</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 body{
   margin:0;
   font-family: Arial;
-  background:#111;
+  background:black;
   color:white;
 }
 
-/* LOADING */
+/* LOADING CINEMA */
 #loading{
   height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
-  background:black;
   flex-direction:column;
+  background:black;
 }
 
 .logo{
+  font-size:45px;
   color:#e50914;
-  font-size:40px;
   font-weight:bold;
 }
 
@@ -36,13 +36,13 @@ body{
   background:url('images/IMG-20260302-WA0040.jpg') center/cover;
 }
 
-.center{
+.overlay{
+  background:rgba(0,0,0,0.6);
   height:100%;
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
-  background:rgba(0,0,0,0.6);
 }
 
 button{
@@ -54,13 +54,6 @@ button{
   border-radius:5px;
   cursor:pointer;
   margin:10px;
-}
-
-/* EPISÓDIOS */
-#episodes{
-  display:none;
-  padding:20px;
-  text-align:center;
 }
 
 /* PLAYER */
@@ -77,15 +70,19 @@ button{
   line-height:1.7;
 }
 
-/* GALERIA */
-.gallery{
-  margin-top:20px;
+/* FINAL SECRETO */
+#final{
+  display:none;
+  margin-top:30px;
+  font-size:20px;
+  color:#ff4d6d;
 }
 
+/* GALERIA */
 .gallery img{
   width:150px;
-  border-radius:10px;
   margin:10px;
+  border-radius:10px;
 }
 </style>
 </head>
@@ -101,27 +98,20 @@ allow="autoplay"></iframe>
 <!-- LOADING -->
 <div id="loading">
   <div class="logo">NETFLIX 💖</div>
-  <p>Carregando sua história...</p>
+  <p>Preparando seu filme...</p>
 </div>
 
 <!-- HOME -->
 <div id="home">
-  <div class="center">
-    <h1>Nossa Série 💖</h1>
-    <button onclick="entrar()">▶ Assistir</button>
+  <div class="overlay">
+    <h1>Minha Princesinha Cacheadinha 💖</h1>
+    <button onclick="start()">▶ Assistir Filme</button>
   </div>
-</div>
-
-<!-- EPISÓDIOS -->
-<div id="episodes">
-  <h2>Temporada 1</h2>
-  <button onclick="playEp(1)">Episódio 1 - O Começo</button>
-  <button onclick="playEp(2)">Episódio 2 - O Amor</button>
-  <button onclick="playEp(3)">Episódio 3 - Para Sempre</button>
 </div>
 
 <!-- PLAYER -->
 <div id="player">
+
   <h2 id="titulo"></h2>
   <p id="story"></p>
 
@@ -132,9 +122,17 @@ allow="autoplay"></iframe>
     <img src="images/Screenshot_2026-03-08-12-21-54-801_com.miui.gallery.jpg">
     <img src="images/IMG-20260302-WA0042.jpg">
     <img src="images/IMG_20260227_120614.jpg">
+    <img src="images/IMG-20260302-WA0051.jpg">
+    <img src="images/IMG-20260302-WA0042.jpg">
   </div>
 
-  <button onclick="voltar()">⬅ Voltar</button>
+  <button onclick="final()">💌 Final Especial</button>
+
+  <div id="final">
+    💖 Você é a melhor coisa que aconteceu na minha vida.
+    Eu te amo para sempre. 💖
+  </div>
+
 </div>
 
 <script>
@@ -145,71 +143,49 @@ setTimeout(()=>{
   home.style.display="block";
 },2000);
 
-/* ENTRAR */
-function entrar(){
+/* START */
+function start(){
 
   home.style.display="none";
-  episodes.style.display="block";
-
-  // tocar música
-  let m = document.getElementById("music");
-  m.src += "&autoplay=1";
-}
-
-/* EPISÓDIOS */
-function playEp(ep){
-
-  episodes.style.display="none";
   player.style.display="block";
 
-  let texto = "";
+  let m = document.getElementById("music");
+  m.src += "&autoplay=1";
 
-  if(ep == 1){
-    titulo.innerText = "Episódio 1 - O Começo";
-    texto = `Tudo começou em 20/12/2025...
-    quando nossas vidas se cruzaram.`;
-  }
-
-  if(ep == 2){
-    titulo.innerText = "Episódio 2 - O Amor";
-    texto = `Você virou minha paz, meu amor,
-    minha princesinha cacheadinha 💖`;
-  }
-
-  if(ep == 3){
-    titulo.innerText = "Episódio 3 - Para Sempre";
-    texto = `E se essa for uma série...
-    eu nunca quero que acabe.
-    Eu escolho você todos os dias 💕`;
-  }
-
-  escrever(texto);
+  escrever();
 }
 
 /* TEXTO */
-function escrever(texto){
+function escrever(){
 
-  story.innerHTML = "";
+  const texto = `Minha princesinha cacheadinha 💖
+
+Desde 20/12/2025, tudo mudou.
+
+Você se tornou meu amor, minha paz, minha vida.
+
+E se isso for um filme...
+eu nunca quero que acabe.`;
+
   let i = 0;
 
   function digitar(){
     if(i < texto.length){
       story.innerHTML += texto.charAt(i);
       i++;
-      setTimeout(digitar, 25);
+      setTimeout(digitar, 30);
     }
   }
 
   digitar();
 }
 
-/* VOLTAR */
-function voltar(){
-  player.style.display="none";
-  episodes.style.display="block";
+/* FINAL */
+function final(){
+  document.getElementById("final").style.display="block";
 }
 
 </script>
 
 </body>
-      </html>
+</html>
