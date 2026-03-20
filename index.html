@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<title>Nosso Filme IMAX 💖</title>
+<title>Nosso Amor 💖</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -11,101 +11,62 @@ body{
   font-family: Arial;
   background:black;
   color:white;
-  overflow:hidden;
   text-align:center;
+  overflow:hidden;
 }
 
-/* FUNDO IMAX */
+/* INTRO */
 #intro{
   height:100vh;
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
-  background: radial-gradient(circle at center, #ff4d6d, #000 70%);
-  animation: zoomIn 3s ease;
+  background: radial-gradient(circle,#ff4d6d,#000);
 }
 
-@keyframes zoomIn{
-  from{transform:scale(1.2); opacity:0;}
-  to{transform:scale(1); opacity:1;}
-}
-
-/* BOTÃO IMAX */
-.play-btn{
-  padding:18px 50px;
-  font-size:22px;
+button{
+  padding:16px 40px;
+  font-size:18px;
   border:none;
-  border-radius:60px;
+  border-radius:50px;
   background:#ff4d6d;
   color:white;
   cursor:pointer;
   font-weight:bold;
-  box-shadow:0 0 40px #ff4d6d;
-  transition:0.3s;
+  box-shadow:0 0 25px #ff4d6d;
 }
 
-.play-btn:hover{
-  transform:scale(1.1);
-}
-
-/* FILME */
+/* CONTEÚDO */
 #movie{
   display:none;
   padding:20px;
-  animation: fade 2s ease;
 }
 
-@keyframes fade{
-  from{opacity:0;}
-  to{opacity:1;}
-}
-
-/* TEXTO CINEMA */
 #story{
-  max-width:750px;
+  max-width:700px;
   margin:auto;
-  font-size:20px;
-  line-height:1.8;
+  font-size:18px;
+  line-height:1.7;
 }
 
-/* GALERIA IMAX */
-.gallery{
-  display:flex;
-  justify-content:center;
-  flex-wrap:wrap;
-  margin-top:20px;
-}
-
+/* GALERIA */
 .gallery img{
-  width:160px;
-  height:160px;
+  width:150px;
+  height:150px;
   object-fit:cover;
-  border-radius:20px;
+  border-radius:15px;
   margin:10px;
-  transition:0.3s;
-  box-shadow:0 0 20px rgba(255,77,109,0.4);
 }
 
-.gallery img:hover{
-  transform:scale(1.15);
-}
-
-/* CORAÇÃO IMAX */
+/* CORAÇÕES */
 .heart{
   position:absolute;
-  font-size:90px;
-  color:rgba(255,77,109,0.08);
-  animation:pulse 2s infinite;
+  font-size:60px;
+  opacity:0.2;
 }
 
-@keyframes pulse{
-  0%{transform:scale(1);}
-  50%{transform:scale(1.4);}
-  100%{transform:scale(1);}
-}
-
-/* FADE CINEMA */
+/* FADE */
 #fade{
   position:fixed;
   width:100%;
@@ -113,30 +74,15 @@ body{
   background:black;
   opacity:0;
   pointer-events:none;
-  transition:2s;
-}
-
-/* CRÉDITOS IMAX */
-#credits{
-  margin-top:40px;
-  opacity:0;
-  animation: credits 6s ease forwards;
-  animation-delay: 28s;
-  font-size:18px;
-  color:#aaa;
-}
-
-@keyframes credits{
-  from{opacity:0; transform:translateY(50px);}
-  to{opacity:1; transform:translateY(0);}
+  transition:1.5s;
 }
 
 /* YOUTUBE OCULTO */
 #yt{
   position:absolute;
+  left:-9999px;
   width:1px;
   height:1px;
-  left:-9999px;
 }
 </style>
 </head>
@@ -145,7 +91,7 @@ body{
 
 <div id="fade"></div>
 
-<!-- 🎧 SOM IMAX -->
+<!-- 🎧 MÚSICA -->
 <iframe
 id="yt"
 src="https://www.youtube.com/embed/Yi4MQecGdfA?autoplay=0&loop=1&playlist=Yi4MQecGdfA"
@@ -153,105 +99,101 @@ allow="autoplay"
 frameborder="0">
 </iframe>
 
-<!-- INTRO IMAX -->
+<!-- INTRO -->
 <div id="intro">
-  <h1>🎬 NOSSO FILME IMAX 💖</h1>
-  <p>Uma história que parece cinema...</p>
-  <button class="play-btn" onclick="play()">▶ ASSISTIR</button>
+  <h1>💖 Nosso Amor 💖</h1>
+  <p>Uma história como filme...</p>
+  <button id="playBtn">▶ ASSISTIR</button>
 </div>
 
 <!-- FILME -->
 <div id="movie">
 
-  <h1>💖 Nossa História (IMAX EDIT)</h1>
+  <h1>🎬 Nossa História</h1>
 
   <p id="story"></p>
 
   <div class="gallery">
-    <img src="./images/IMG-20260302-WA0040.jpg">
-    <img src="./images/IMG-20260227-WA0008.jpg">
-  </div>
-
-  <div id="credits">
-    <b>🎬 Créditos Finais</b><br><br>
-    Um amor real entre duas almas 💖<br>
-    Ricardo & Minha princesinha cacheadinha<br><br>
-    “Fim? Não… apenas o começo.”
+    <img src="images/IMG-20260302-WA0040.jpg">
+    <img src="images/IMG-20260227-WA0008.jpg">
   </div>
 
 </div>
 
 <script>
 
-window.play = function(){
+document.addEventListener("DOMContentLoaded", function () {
 
-  document.getElementById("fade").style.opacity=1;
+  const btn = document.getElementById("playBtn");
 
-  setTimeout(()=>{
+  btn.addEventListener("click", function () {
 
-    document.getElementById("intro").style.display="none";
-    document.getElementById("movie").style.display="block";
+    document.getElementById("fade").style.opacity = 1;
 
-    // ativa música
-    let yt = document.getElementById("yt");
-    yt.src = yt.src.replace("autoplay=0","autoplay=1");
+    setTimeout(() => {
 
-    textoIMAX();
-    coracoesIMAX();
+      document.getElementById("intro").style.display = "none";
+      document.getElementById("movie").style.display = "block";
 
-  },2000);
-}
+      // ativa música
+      let yt = document.getElementById("yt");
+      yt.src = yt.src.replace("autoplay=0", "autoplay=1");
 
-/* NARRAÇÃO IMAX */
-function textoIMAX(){
+      escreverHistoria();
+      criarCoracoes();
 
-  const txt = `Minha princesinha cacheadinha 💖
+    }, 1200);
 
-Isso não é apenas uma história...
-é um filme.
+  });
 
-Uma história que começou sem roteiro...
-mas virou algo real.
+});
 
-Desde 20/12/2025,
-eu descobri o verdadeiro amor.
+function escreverHistoria(){
 
-Você é minha paz, meu lar, minha vida.
+  const el = document.getElementById("story");
 
-E se isso for um filme...
-eu nunca quero que ele acabe.`;
+  const texto = `Minha princesinha cacheadinha 💖
 
-  let i=0;
+Desde 20/12/2025, minha vida mudou completamente.
 
-  function escrever(){
-    if(i < txt.length){
-      document.getElementById("story").innerHTML += txt.charAt(i);
+Você se tornou minha paz, meu amor e meu lar.
+
+Cada dia com você parece um filme real.
+
+E eu sempre vou escolher você.`;
+
+  let i = 0;
+
+  function digitar(){
+    if(i < texto.length){
+      el.innerHTML += texto.charAt(i);
       i++;
-      setTimeout(escrever,35);
+      setTimeout(digitar, 35);
     }
   }
 
-  escrever();
+  digitar();
 }
 
-/* EFEITO IMAX */
-function coracoesIMAX(){
+function criarCoracoes(){
 
-  setInterval(()=>{
+  setInterval(() => {
+
     let h = document.createElement("div");
+    h.innerHTML = "💖";
     h.classList.add("heart");
-    h.innerHTML="💖";
 
-    h.style.left = Math.random()*100+"vw";
-    h.style.top = Math.random()*100+"vh";
+    h.style.left = Math.random()*100 + "vw";
+    h.style.top = Math.random()*100 + "vh";
 
     document.body.appendChild(h);
 
-    setTimeout(()=>h.remove(),5000);
-  },400);
+    setTimeout(()=>h.remove(),4000);
+
+  }, 500);
 }
 
 </script>
 
 </body>
-  </html>
+</html>
