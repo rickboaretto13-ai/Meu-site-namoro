@@ -2,87 +2,94 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<title>Nosso Filme</title>
+<title>💖 Só pra você</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 body{
   margin:0;
-  font-family: Arial;
+  font-family: Georgia;
   background:black;
   color:white;
-}
-
-/* LOADING CINEMA */
-#loading{
-  height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  flex-direction:column;
-  background:black;
-}
-
-.logo{
-  font-size:45px;
-  color:#e50914;
-  font-weight:bold;
-}
-
-/* HOME */
-#home{
-  display:none;
-  height:100vh;
-  background:url('images/IMG-20260302-WA0040.jpg') center/cover;
-}
-
-.overlay{
-  background:rgba(0,0,0,0.6);
-  height:100%;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-}
-
-button{
-  padding:15px 40px;
-  background:#e50914;
-  border:none;
-  color:white;
-  font-size:18px;
-  border-radius:5px;
-  cursor:pointer;
-  margin:10px;
-}
-
-/* PLAYER */
-#player{
-  display:none;
-  padding:20px;
+  overflow:hidden;
   text-align:center;
 }
 
+/* LOGIN */
+#login{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+}
+
+input{
+  padding:12px;
+  border-radius:10px;
+  border:none;
+  margin:10px;
+  text-align:center;
+}
+
+button{
+  padding:12px 30px;
+  background:#ff4d6d;
+  border:none;
+  color:white;
+  border-radius:20px;
+  cursor:pointer;
+}
+
+/* SITE */
+#site{
+  display:none;
+  padding:20px;
+}
+
+/* TEXTO */
 #story{
   max-width:700px;
   margin:auto;
-  font-size:18px;
-  line-height:1.7;
+  font-size:22px;
+  line-height:1.8;
 }
 
-/* FINAL SECRETO */
-#final{
+/* FOTO */
+.img{
   display:none;
-  margin-top:30px;
-  font-size:20px;
-  color:#ff4d6d;
+  margin-top:20px;
 }
 
-/* GALERIA */
-.gallery img{
-  width:150px;
-  margin:10px;
-  border-radius:10px;
+.img img{
+  width:220px;
+  border-radius:15px;
+}
+
+/* CARTA */
+#carta{
+  display:none;
+  margin-top:25px;
+  color:#ff4d6d;
+  font-size:22px;
+  white-space:pre-line;
+}
+
+/* WHATSAPP */
+#whats{
+  display:none;
+  margin-top:20px;
+}
+
+/* CORAÇÕES */
+.heart{
+  position:absolute;
+  animation:float 6s linear forwards;
+}
+
+@keyframes float{
+  from{transform:translateY(100vh);}
+  to{transform:translateY(-100vh);}
 }
 </style>
 </head>
@@ -95,77 +102,77 @@ width="0" height="0"
 src="https://www.youtube.com/embed/Yi4MQecGdfA?enablejsapi=1"
 allow="autoplay"></iframe>
 
-<!-- LOADING -->
-<div id="loading">
-  <div class="logo">NETFLIX 💖</div>
-  <p>Preparando seu filme...</p>
+<!-- 🔐 LOGIN -->
+<div id="login">
+  <h2>💖 Área exclusiva</h2>
+  <p>Digite sua senha, minha princesa</p>
+  <input id="senha" placeholder="senha">
+  <button onclick="entrar()">Entrar</button>
 </div>
 
-<!-- HOME -->
-<div id="home">
-  <div class="overlay">
-    <h1>Minha Princesinha Cacheadinha 💖</h1>
-    <button onclick="start()">▶ Assistir Filme</button>
-  </div>
-</div>
+<!-- 💖 SITE -->
+<div id="site">
 
-<!-- PLAYER -->
-<div id="player">
+  <h1>💖 Só você e eu 💖</h1>
 
-  <h2 id="titulo"></h2>
   <p id="story"></p>
 
-  <div class="gallery">
+  <div class="img" id="img1">
     <img src="images/IMG-20260302-WA0040.jpg">
-    <img src="images/IMG-20260227-WA0008.jpg">
-    <img src="images/IMG_20260228_223305.jpg">
-    <img src="images/Screenshot_2026-03-08-12-21-54-801_com.miui.gallery.jpg">
-    <img src="images/IMG-20260302-WA0042.jpg">
-    <img src="images/IMG_20260227_120614.jpg">
-    <img src="images/IMG-20260302-WA0051.jpg">
-    <img src="images/IMG-20260302-WA0042.jpg">
   </div>
 
-  <button onclick="final()">💌 Final Especial</button>
+  <div class="img" id="img2">
+    <img src="images/IMG-20260227-WA0008.jpg">
+  </div>
 
-  <div id="final">
-    💖 Você é a melhor coisa que aconteceu na minha vida.
-    Eu te amo para sempre. 💖
+  <div id="carta"></div>
+
+  <!-- 💬 WHATSAPP -->
+  <div id="whats">
+    <button onclick="responder()">💬 Me responde</button>
   </div>
 
 </div>
 
 <script>
 
-/* LOADING */
-setTimeout(()=>{
-  loading.style.display="none";
-  home.style.display="block";
-},2000);
+/* 🔐 SENHA SIMPLES */
+function entrar(){
+  let senha = document.getElementById("senha").value;
 
-/* START */
-function start(){
+  if(senha === "20/12/2025"){
+    login.style.display="none";
+    site.style.display="block";
 
-  home.style.display="none";
-  player.style.display="block";
-
-  let m = document.getElementById("music");
-  m.src += "&autoplay=1";
-
-  escrever();
+    music.src += "&autoplay=1";
+    start();
+  } else {
+    alert("senha errada 💔");
+  }
 }
 
-/* TEXTO */
+/* 🎬 INICIO */
+function start(){
+  escrever();
+  coracoes();
+}
+
+/* 📖 HISTÓRIA EXCLUSIVA */
 function escrever(){
 
-  const texto = `Minha princesinha cacheadinha 💖
+  const texto = `Minha princesa...
 
-Desde 20/12/2025, tudo mudou.
+Esse site não é pra qualquer pessoa.
 
-Você se tornou meu amor, minha paz, minha vida.
+É só pra você.
 
-E se isso for um filme...
-eu nunca quero que acabe.`;
+Você é meu mundo inteiro.
+
+E mesmo quando eu erro...
+
+eu ainda te escolho.
+
+Sempre.`;
 
   let i = 0;
 
@@ -173,16 +180,67 @@ eu nunca quero que acabe.`;
     if(i < texto.length){
       story.innerHTML += texto.charAt(i);
       i++;
-      setTimeout(digitar, 30);
+      setTimeout(digitar, 50);
+    } else {
+
+      setTimeout(()=> img1.style.display="block", 1000);
+      setTimeout(()=> img2.style.display="block", 2500);
+
+      setTimeout(()=>{
+        carta.style.display="block";
+        escreverCarta();
+      },4000);
     }
   }
 
   digitar();
 }
 
-/* FINAL */
-function final(){
-  document.getElementById("final").style.display="block";
+/* 💌 CARTA FINAL */
+function escreverCarta(){
+
+  const texto = `Eu não preciso de nada no mundo...
+
+só de você.
+
+Se um dia você duvidar disso...
+
+lembra desse site.
+
+Ele foi feito pensando em cada detalhe seu.
+
+💖 Eu te amo.`;
+
+  let i = 0;
+
+  function digitar(){
+    if(i < texto.length){
+      carta.innerHTML += texto.charAt(i);
+      i++;
+      setTimeout(digitar, 40);
+    } else {
+      setTimeout(()=>whats.style.display="block", 1000);
+    }
+  }
+
+  digitar();
+}
+
+/* 💬 WHATSAPP */
+function responder(){
+  window.open("https://wa.me/5511978297307?text=Eu%20vi%20o%20site%20💖", "_blank");
+}
+
+/* 💖 CORAÇÕES */
+function coracoes(){
+  setInterval(()=>{
+    let h = document.createElement("div");
+    h.innerHTML="💖";
+    h.className="heart";
+    h.style.left=Math.random()*100+"vw";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),6000);
+  },300);
 }
 
 </script>
