@@ -2,63 +2,38 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<title>Netflix Love 💖</title>
+<title>Nossa Série 💖</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 body{
   margin:0;
-  font-family: Arial, sans-serif;
+  font-family: Arial;
   background:#111;
   color:white;
-  overflow-x:hidden;
 }
 
 /* LOADING */
 #loading{
   height:100vh;
   display:flex;
-  flex-direction:column;
   justify-content:center;
   align-items:center;
   background:black;
+  flex-direction:column;
 }
 
 .logo{
+  color:#e50914;
   font-size:40px;
   font-weight:bold;
-  color:#e50914;
-  letter-spacing:2px;
-}
-
-.bar{
-  width:200px;
-  height:4px;
-  background:#333;
-  margin-top:20px;
-  overflow:hidden;
-  border-radius:10px;
-}
-
-.bar div{
-  width:0%;
-  height:100%;
-  background:#e50914;
-  animation:load 2s forwards;
-}
-
-@keyframes load{
-  to{width:100%;}
 }
 
 /* HOME */
 #home{
   display:none;
   height:100vh;
-  background:linear-gradient(to bottom, rgba(0,0,0,0.3), black),
-  url('images/IMG-20260302-WA0040.jpg');
-  background-size:cover;
-  background-position:center;
+  background:url('images/IMG-20260302-WA0040.jpg') center/cover;
 }
 
 .center{
@@ -67,149 +42,155 @@ body{
   flex-direction:column;
   justify-content:center;
   align-items:center;
-  text-align:center;
+  background:rgba(0,0,0,0.6);
 }
 
 button{
   padding:15px 40px;
-  font-size:18px;
   background:#e50914;
   border:none;
   color:white;
+  font-size:18px;
   border-radius:5px;
   cursor:pointer;
-  font-weight:bold;
+  margin:10px;
 }
 
-/* CONTENT */
-#content{
+/* EPISÓDIOS */
+#episodes{
   display:none;
   padding:20px;
-  background:black;
+  text-align:center;
+}
+
+/* PLAYER */
+#player{
+  display:none;
+  padding:20px;
+  text-align:center;
 }
 
 #story{
-  max-width:800px;
+  max-width:700px;
   margin:auto;
   font-size:18px;
-  line-height:1.8;
-  text-align:center;
-  color:#ddd;
+  line-height:1.7;
 }
 
 /* GALERIA */
-.row{
-  display:flex;
-  gap:10px;
-  overflow-x:auto;
-  padding:20px;
+.gallery{
+  margin-top:20px;
 }
 
-.row img{
-  width:160px;
-  height:160px;
-  object-fit:cover;
+.gallery img{
+  width:150px;
   border-radius:10px;
-  transition:0.3s;
-}
-
-.row img:hover{
-  transform:scale(1.1);
+  margin:10px;
 }
 </style>
 </head>
 
 <body>
 
-<!-- 🎧 MÚSICA (YOUTUBE OCULTO) -->
-<iframe
-id="music"
-width="0"
-height="0"
+<!-- 🎧 MÚSICA -->
+<iframe id="music"
+width="0" height="0"
 src="https://www.youtube.com/embed/Yi4MQecGdfA?enablejsapi=1"
-frameborder="0"
-allow="autoplay">
-</iframe>
+allow="autoplay"></iframe>
 
 <!-- LOADING -->
 <div id="loading">
-  <div class="logo">NETFLIX</div>
-  <div class="bar"><div></div></div>
+  <div class="logo">NETFLIX 💖</div>
+  <p>Carregando sua história...</p>
 </div>
 
 <!-- HOME -->
 <div id="home">
   <div class="center">
-    <h1>💖 Uma história real</h1>
-    <button onclick="entrar()">▶ Assistir agora</button>
+    <h1>Nossa Série 💖</h1>
+    <button onclick="entrar()">▶ Assistir</button>
   </div>
 </div>
 
-<!-- CONTENT -->
-<div id="content">
+<!-- EPISÓDIOS -->
+<div id="episodes">
+  <h2>Temporada 1</h2>
+  <button onclick="playEp(1)">Episódio 1 - O Começo</button>
+  <button onclick="playEp(2)">Episódio 2 - O Amor</button>
+  <button onclick="playEp(3)">Episódio 3 - Para Sempre</button>
+</div>
 
-  <h2 style="text-align:center;">Nossa História 💖</h2>
-
+<!-- PLAYER -->
+<div id="player">
+  <h2 id="titulo"></h2>
   <p id="story"></p>
 
-  <div class="row">
+  <div class="gallery">
     <img src="images/IMG-20260302-WA0040.jpg">
     <img src="images/IMG-20260227-WA0008.jpg">
-    <img src="images/IMG_20260228_223305.jpg">
-    <img src="images/Screenshot_2026-03-08-12-21-54-801_com.miui.gallery.jpg">
-    <img src="images/IMG-20260302-WA0042.jpg">
-    <img src="images/IMG_20260227_120614.jpg">
-    <img src="images/IMG-20260302-WA0051.jpg">
-    <img src="images/IMG-20260302-WA0042.jpg">
   </div>
 
+  <button onclick="voltar()">⬅ Voltar</button>
 </div>
 
 <script>
 
 /* LOADING */
 setTimeout(()=>{
-  document.getElementById("loading").style.display="none";
-  document.getElementById("home").style.display="block";
-},2500);
+  loading.style.display="none";
+  home.style.display="block";
+},2000);
 
 /* ENTRAR */
 function entrar(){
 
-  document.getElementById("home").style.display="none";
-  document.getElementById("content").style.display="block";
+  home.style.display="none";
+  episodes.style.display="block";
 
-  // 🎧 ativa música
-  const music = document.getElementById("music");
-  if(music){
-    music.src = music.src + "&autoplay=1";
-  }
-
-  escrever();
+  // tocar música
+  let m = document.getElementById("music");
+  m.src += "&autoplay=1";
 }
 
-/* TEXTO CINEMA */
-function escrever(){
+/* EPISÓDIOS */
+function playEp(ep){
 
-  const el = document.getElementById("story");
+  episodes.style.display="none";
+  player.style.display="block";
 
-  const texto = `Minha princesinha cacheadinha 💖
+  let texto = "";
 
-Desde 20/12/2025, tudo mudou.
+  if(ep == 1){
+    titulo.innerText = "Episódio 1 - O Começo";
+    texto = `Tudo começou em 20/12/2025...
+    quando nossas vidas se cruzaram.`;
+  }
 
-Você virou minha paz, meu amor e meu lar.
+  if(ep == 2){
+    titulo.innerText = "Episódio 2 - O Amor";
+    texto = `Você virou minha paz, meu amor,
+    minha princesinha cacheadinha 💖`;
+  }
 
-Não é só namoro… é série da vida real.
+  if(ep == 3){
+    titulo.innerText = "Episódio 3 - Para Sempre";
+    texto = `E se essa for uma série...
+    eu nunca quero que acabe.
+    Eu escolho você todos os dias 💕`;
+  }
 
-Eu escolho você todos os dias.
+  escrever(texto);
+}
 
-Ricardo & Minha princesa 💕`;
+/* TEXTO */
+function escrever(texto){
 
+  story.innerHTML = "";
   let i = 0;
 
   function digitar(){
     if(i < texto.length){
-      el.innerHTML += texto.charAt(i);
+      story.innerHTML += texto.charAt(i);
       i++;
       setTimeout(digitar, 25);
     }
@@ -218,7 +199,13 @@ Ricardo & Minha princesa 💕`;
   digitar();
 }
 
+/* VOLTAR */
+function voltar(){
+  player.style.display="none";
+  episodes.style.display="block";
+}
+
 </script>
 
 </body>
-</html>
+      </html>
