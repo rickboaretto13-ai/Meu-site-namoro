@@ -2,118 +2,157 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<title>Nosso Amor 💖</title>
+<title>Netflix Love 💖</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 body{
   margin:0;
-  font-family: Arial;
-  background:black;
+  font-family: Arial, sans-serif;
+  background:#111;
   color:white;
-  text-align:center;
-  overflow:hidden;
+  overflow-x:hidden;
 }
 
-/* INTRO */
-#intro{
+/* LOADING */
+#loading{
   height:100vh;
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
-  background: radial-gradient(circle,#ff4d6d,#000);
+  background:black;
+}
+
+.logo{
+  font-size:40px;
+  font-weight:bold;
+  color:#e50914;
+  letter-spacing:2px;
+}
+
+.bar{
+  width:200px;
+  height:4px;
+  background:#333;
+  margin-top:20px;
+  overflow:hidden;
+  border-radius:10px;
+}
+
+.bar div{
+  width:0%;
+  height:100%;
+  background:#e50914;
+  animation:load 2s forwards;
+}
+
+@keyframes load{
+  to{width:100%;}
+}
+
+/* HOME */
+#home{
+  display:none;
+  height:100vh;
+  background:linear-gradient(to bottom, rgba(0,0,0,0.3), black),
+  url('images/IMG-20260302-WA0040.jpg');
+  background-size:cover;
+  background-position:center;
+}
+
+.center{
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
 }
 
 button{
-  padding:16px 40px;
+  padding:15px 40px;
   font-size:18px;
+  background:#e50914;
   border:none;
-  border-radius:50px;
-  background:#ff4d6d;
   color:white;
+  border-radius:5px;
   cursor:pointer;
   font-weight:bold;
-  box-shadow:0 0 20px #ff4d6d;
 }
 
-/* SITE */
-#movie{
+/* CONTENT */
+#content{
   display:none;
   padding:20px;
+  background:black;
 }
 
 #story{
-  max-width:700px;
+  max-width:800px;
   margin:auto;
   font-size:18px;
-  line-height:1.7;
+  line-height:1.8;
+  text-align:center;
+  color:#ddd;
 }
 
-/* IMAGENS */
-.gallery img{
+/* GALERIA */
+.row{
+  display:flex;
+  gap:10px;
+  overflow-x:auto;
+  padding:20px;
+}
+
+.row img{
   width:160px;
   height:160px;
   object-fit:cover;
-  border-radius:15px;
-  margin:10px;
+  border-radius:10px;
+  transition:0.3s;
 }
 
-/* CORAÇÕES */
-.heart{
-  position:absolute;
-  font-size:60px;
-  opacity:0.2;
-}
-
-/* FADE */
-#fade{
-  position:fixed;
-  width:100%;
-  height:100%;
-  background:black;
-  opacity:0;
-  pointer-events:none;
-  transition:1s;
-}
-
-/* YOUTUBE OCULTO */
-#yt{
-  position:absolute;
-  left:-9999px;
-  width:1px;
-  height:1px;
+.row img:hover{
+  transform:scale(1.1);
 }
 </style>
 </head>
 
 <body>
 
-<div id="fade"></div>
-
-<!-- 🎧 MÚSICA -->
+<!-- 🎧 MÚSICA (YOUTUBE OCULTO) -->
 <iframe
-id="yt"
-src="https://www.youtube.com/embed/Yi4MQecGdfA?autoplay=0&loop=1&playlist=Yi4MQecGdfA"
-allow="autoplay"
-frameborder="0">
+id="music"
+width="0"
+height="0"
+src="https://www.youtube.com/embed/Yi4MQecGdfA?enablejsapi=1"
+frameborder="0"
+allow="autoplay">
 </iframe>
 
-<!-- INTRO -->
-<div id="intro">
-  <h1>💖 Nosso Amor 💖</h1>
-  <p>Uma história de filme...</p>
-  <button onclick="iniciarSite()">▶ ASSISTIR</button>
+<!-- LOADING -->
+<div id="loading">
+  <div class="logo">NETFLIX 💖</div>
+  <div class="bar"><div></div></div>
 </div>
 
-<!-- SITE -->
-<div id="movie">
+<!-- HOME -->
+<div id="home">
+  <div class="center">
+    <h1>💖 Uma história real</h1>
+    <button onclick="entrar()">▶ Assistir agora</button>
+  </div>
+</div>
 
-  <h1>🎬 Nossa História</h1>
+<!-- CONTENT -->
+<div id="content">
+
+  <h2 style="text-align:center;">Nossa História 💖</h2>
 
   <p id="story"></p>
 
-  <div class="gallery">
+  <div class="row">
     <img src="images/IMG-20260302-WA0040.jpg">
     <img src="images/IMG-20260227-WA0008.jpg">
   </div>
@@ -122,52 +161,43 @@ frameborder="0">
 
 <script>
 
-function iniciarSite(){
+/* LOADING */
+setTimeout(()=>{
+  document.getElementById("loading").style.display="none";
+  document.getElementById("home").style.display="block";
+},2500);
 
-  const intro = document.getElementById("intro");
-  const movie = document.getElementById("movie");
-  const fade = document.getElementById("fade");
+/* ENTRAR */
+function entrar(){
 
-  if(!intro || !movie){
-    alert("Erro no site: elementos não encontrados");
-    return;
+  document.getElementById("home").style.display="none";
+  document.getElementById("content").style.display="block";
+
+  // 🎧 ativa música
+  const music = document.getElementById("music");
+  if(music){
+    music.src = music.src + "&autoplay=1";
   }
 
-  fade.style.opacity = "1";
-
-  setTimeout(() => {
-
-    intro.style.display = "none";
-    movie.style.display = "block";
-
-    // ativa música
-    const yt = document.getElementById("yt");
-    if(yt){
-      yt.src = yt.src.replace("autoplay=0","autoplay=1");
-    }
-
-    escreverHistoria();
-    criarCoracoes();
-
-  }, 1000);
+  escrever();
 }
 
-/* TEXTO */
-function escreverHistoria(){
+/* TEXTO CINEMA */
+function escrever(){
 
   const el = document.getElementById("story");
 
-  if(!el) return;
-
   const texto = `Minha princesinha cacheadinha 💖
 
-Desde 20/12/2025 tudo mudou.
+Desde 20/12/2025, tudo mudou.
 
-Você é minha paz, meu amor e meu lar.
+Você virou minha paz, meu amor e meu lar.
+
+Não é só namoro… é série da vida real.
 
 Eu escolho você todos os dias.
 
-Nosso amor parece um filme real.`;
+Ricardo & Minha princesa 💕`;
 
   let i = 0;
 
@@ -175,30 +205,11 @@ Nosso amor parece um filme real.`;
     if(i < texto.length){
       el.innerHTML += texto.charAt(i);
       i++;
-      setTimeout(digitar, 35);
+      setTimeout(digitar, 25);
     }
   }
 
   digitar();
-}
-
-/* CORAÇÕES */
-function criarCoracoes(){
-
-  setInterval(() => {
-
-    const h = document.createElement("div");
-    h.innerHTML = "💖";
-    h.className = "heart";
-
-    h.style.left = Math.random()*100 + "vw";
-    h.style.top = Math.random()*100 + "vh";
-
-    document.body.appendChild(h);
-
-    setTimeout(() => h.remove(), 4000);
-
-  }, 500);
 }
 
 </script>
