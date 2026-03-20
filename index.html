@@ -34,10 +34,10 @@ button{
   color:white;
   cursor:pointer;
   font-weight:bold;
-  box-shadow:0 0 25px #ff4d6d;
+  box-shadow:0 0 20px #ff4d6d;
 }
 
-/* CONTEÚDO */
+/* SITE */
 #movie{
   display:none;
   padding:20px;
@@ -50,10 +50,10 @@ button{
   line-height:1.7;
 }
 
-/* GALERIA */
+/* IMAGENS */
 .gallery img{
-  width:150px;
-  height:150px;
+  width:160px;
+  height:160px;
   object-fit:cover;
   border-radius:15px;
   margin:10px;
@@ -74,7 +74,7 @@ button{
   background:black;
   opacity:0;
   pointer-events:none;
-  transition:1.5s;
+  transition:1s;
 }
 
 /* YOUTUBE OCULTO */
@@ -102,11 +102,11 @@ frameborder="0">
 <!-- INTRO -->
 <div id="intro">
   <h1>💖 Nosso Amor 💖</h1>
-  <p>Uma história como filme...</p>
+  <p>Uma história de filme...</p>
   <button onclick="iniciarSite()">▶ ASSISTIR</button>
 </div>
 
-<!-- FILME -->
+<!-- SITE -->
 <div id="movie">
 
   <h1>🎬 Nossa História</h1>
@@ -129,18 +129,18 @@ function iniciarSite(){
   const fade = document.getElementById("fade");
 
   if(!intro || !movie){
-    alert("Erro: elementos não encontrados no HTML");
+    alert("Erro no site: elementos não encontrados");
     return;
   }
 
-  fade.style.opacity = 1;
+  fade.style.opacity = "1";
 
   setTimeout(() => {
 
     intro.style.display = "none";
     movie.style.display = "block";
 
-    // música YouTube
+    // ativa música
     const yt = document.getElementById("yt");
     if(yt){
       yt.src = yt.src.replace("autoplay=0","autoplay=1");
@@ -152,6 +152,7 @@ function iniciarSite(){
   }, 1000);
 }
 
+/* TEXTO */
 function escreverHistoria(){
 
   const el = document.getElementById("story");
@@ -160,11 +161,13 @@ function escreverHistoria(){
 
   const texto = `Minha princesinha cacheadinha 💖
 
-Desde 20/12/2025 minha vida mudou completamente.
+Desde 20/12/2025 tudo mudou.
 
 Você é minha paz, meu amor e meu lar.
 
-E eu escolho você todos os dias.`;
+Eu escolho você todos os dias.
+
+Nosso amor parece um filme real.`;
 
   let i = 0;
 
@@ -172,24 +175,24 @@ E eu escolho você todos os dias.`;
     if(i < texto.length){
       el.innerHTML += texto.charAt(i);
       i++;
-      setTimeout(digitar, 30);
+      setTimeout(digitar, 35);
     }
   }
 
   digitar();
 }
 
+/* CORAÇÕES */
 function criarCoracoes(){
 
   setInterval(() => {
 
     const h = document.createElement("div");
     h.innerHTML = "💖";
-    h.style.position = "absolute";
+    h.className = "heart";
+
     h.style.left = Math.random()*100 + "vw";
     h.style.top = Math.random()*100 + "vh";
-    h.style.opacity = "0.2";
-    h.style.fontSize = "60px";
 
     document.body.appendChild(h);
 
@@ -198,7 +201,7 @@ function criarCoracoes(){
   }, 500);
 }
 
-               </script>
+</script>
 
 </body>
 </html>
