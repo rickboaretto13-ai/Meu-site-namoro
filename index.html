@@ -1,92 +1,159 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <title>Nosso Amor 💖</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>Nosso Amor 💖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    body{
-      margin:0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #ff4d6d, #ffb3c1);
-      color:white;
-      text-align:center;
-    }
+<style>
+body{
+  margin:0;
+  font-family: Arial;
+  background: linear-gradient(135deg,#ff4d6d,#ffb3c1);
+  color:white;
+  text-align:center;
+  overflow:hidden;
+}
 
-    #start{
-      height:100vh;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      flex-direction:column;
-    }
+/* ENTRADA */
+#start{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  animation: fadeIn 2s ease;
+}
 
-    button{
-      padding:15px 30px;
-      font-size:18px;
-      border:none;
-      border-radius:20px;
-      background:white;
-      color:#ff4d6d;
-      cursor:pointer;
-      font-weight:bold;
-    }
+@keyframes fadeIn{
+  from{opacity:0;}
+  to{opacity:1;}
+}
 
-    #site{
-      display:none;
-      padding:20px;
-    }
+/* BOTÃO */
+button{
+  padding:15px 30px;
+  font-size:18px;
+  border:none;
+  border-radius:25px;
+  background:white;
+  color:#ff4d6d;
+  font-weight:bold;
+  cursor:pointer;
+  transition:0.3s;
+}
 
-    img{
-      width:90%;
-      max-width:300px;
-      border-radius:20px;
-      margin:10px;
-    }
-  </style>
+button:hover{
+  transform:scale(1.1);
+}
+
+/* SITE */
+#site{
+  display:none;
+  padding:20px;
+  animation: up 1s ease;
+}
+
+@keyframes up{
+  from{transform:translateY(30px);opacity:0;}
+  to{transform:translateY(0);opacity:1;}
+}
+
+img{
+  width:90%;
+  max-width:300px;
+  border-radius:20px;
+  margin:10px;
+}
+
+/* CORAÇÃO FLUTUANDO */
+.heart{
+  position:absolute;
+  color:#ff4d6d;
+  animation: fall linear infinite;
+}
+
+@keyframes fall{
+  from{transform:translateY(-10vh);opacity:1;}
+  to{transform:translateY(110vh);opacity:0;}
+}
+</style>
 </head>
 
 <body>
 
-<!-- TELA DE ENTRADA -->
+<!-- MÚSICA (opcional) -->
+<audio id="music" loop>
+  <source src="https://cdn.pixabay.com/audio/2022/10/16/audio_12b5b1.mp3" type="audio/mp3">
+</audio>
+
+<!-- ENTRADA -->
 <div id="start">
-  <h1>Bem-vindo 💖</h1>
-  <p>Feito com amor para minha princesa cacheadinha</p>
-  <button onclick="entrar()">Entrar</button>
+  <h1>💖 Nosso Amor 💖</h1>
+  <p>Feito pra minha princesinha cacheadinha</p>
+  <button onclick="entrar()">Entrar 💖</button>
 </div>
 
 <!-- SITE -->
 <div id="site">
-  <h1>💖 Nosso Amor 💖</h1>
+  <h1>💖 Nossa História 💖</h1>
 
-  <p>
-    Minha princesa, minha cacheadinha 💕<br>
-    Cada dia com você é especial, meu amor sempre quis ser o homem que você precisava.<br>
-    Mais saiba que eu sempre vou lutar pra conquistar nossas coisinhas e nossa liberdade.<br>
-    Eu nunca sei oque falar nesses dias nunca me dediquei tanto em um relacionamento<br>
-    Nunca amei ninguém a esse ponto de ficar louco e obsecado e me desculpe por não ter ido ligação<br>
-    Sim eu preparei essa surpresa de ultima hora, mais sempre planejei fazer isso mais é isso meu amor.
-    Não se esqueça que você é minha princesinha e EU TE AMO MUITÃO TÃO TÃO<br>
-    Ricardo & Minha princesinha cacheadinha 💖<br>
-    Início: 20/12/2025
-  </p>
+    <p>
+Minha princesa cacheadinha 💕<br><br>
 
-  <img src="images/IMG-20260302-WA0040.jpg">
-  <img src="images/IMG-20260227-WA0008.jpg">
+Desde o dia <b>20/12/2025</b>, minha vida ganhou um novo sentido.<br>
+Não foi apenas um começo de namoro… foi o começo de algo que eu nunca imaginei sentir tão forte assim.<br><br>
 
-  <p>EU Te amo muito 💖</p>
+Você se tornou o meu lugar seguro, meu sorriso no meio do caos, minha paz nos dias difíceis e minha alegria nos dias bons.<br><br>
+
+Eu aprendi com você o verdadeiro significado de amar alguém de verdade — não só com palavras, mas com atitudes, cuidado e presença.<br><br>
+
+Sei que nem sempre sou perfeito, mas cada detalhe meu carrega a vontade de te fazer feliz, de te ver sorrir e de construir algo lindo ao seu lado.<br><br>
+
+Você é minha princesinha, minha cacheadinha, meu amor 💖<br>
+E independentemente de qualquer coisa, eu escolho você todos os dias.<br><br>
+
+<b>Ricardo & Minha princesinha cacheadinha 💕</b><br>
+Início: 20/12/2025
+    </p>
+
+  <img src="./images/IMG-20260302-WA0040.jpg">
+  <img src="./images/IMG-20260227-WA0008.jpg">
+
+  <br><br>
+
+  <button onclick="abrirVideo()">Te enviar 💖</button>
 </div>
 
 <script>
-function entrar(){
+
+window.entrar = function(){
   document.getElementById("start").style.display = "none";
   document.getElementById("site").style.display = "block";
+
+  document.getElementById("music").play();
+
+  setInterval(criarCoracao,300);
 }
 
-function abrirVideo(){
-  window.open("https://youtu.be/Yi4MQecGdfA?si=w_B6jupgWqkNsgu6", "_blank");
-  }
+window.abrirVideo = function(){
+  window.open("https://youtu.be/Yi4MQecGdfA?si=w_B6jupgWqkNsgu6","_blank");
+}
+
+/* CORAÇÕES */
+function criarCoracao(){
+  const heart = document.createElement("div");
+  heart.classList.add("heart");
+  heart.innerHTML = "💖";
+
+  heart.style.left = Math.random()*100+"vw";
+  heart.style.animationDuration = (3+Math.random()*5)+"s";
+
+  document.body.appendChild(heart);
+
+  setTimeout(()=> heart.remove(),8000);
+}
+
 </script>
 
 </body>
